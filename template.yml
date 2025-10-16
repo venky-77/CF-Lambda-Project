@@ -47,7 +47,7 @@ Resources:
       FlexibleTimeWindow:
         Mode: "OFF"
       State: ENABLED  
-      # GroupName: default
+      GroupName: default
       Target:
         Arn: !GetAtt MyLambdaFunction.Arn
         RoleArn: !Ref ExistingSchedulerExecutionRoleArn
@@ -74,4 +74,5 @@ Outputs:
     Description: Passed-in ARN of the Scheduler execution role
 
     Value: !Ref ExistingSchedulerExecutionRoleArn
+
 
