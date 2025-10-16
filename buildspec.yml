@@ -7,7 +7,5 @@ phases:
 
   build:
     commands:
-       aws cloudformation deploy \
-         --template-body file://template.yml \
-         --stack-name lambda-unload-job-stack \
-         --region us-east-1
+      - aws cloudformation deploy --stack-name Lambda-unload-job-stack --template-file template.yml --region us-east-1
+
