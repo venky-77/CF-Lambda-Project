@@ -9,6 +9,4 @@ phases:
   build:
     commands:
       - echo "Deploying CloudFormation stack"
-      - aws cloudformation deploy \
-          --template-file template.yaml \
-          --stack-name MyLambdaSchedulerStack
+      - aws cloudformation deploy --template-file template.yaml --stack-name MyLambdaSchedulerStack --capabilities CAPABILITY_NAMED_IAM
