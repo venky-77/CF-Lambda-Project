@@ -7,10 +7,15 @@ phases:
 
   build:
     commands:
-      - aws cloudformation deploy --stack-name Lambda-unload-job-stack --template-file template.yml --region us-east-1
-artificats:
+      - echo "Deploying CloudFormation stack..."
+      - aws cloudformation deploy \
+          --template-file template.yaml \
+          --stack-name Lambda-unload-job-stack \
+          --region us-east-1 \
+          --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM
+      - echo " eployment complete. Creating artifact..."
+      - echo "Build completed successfully" > build-output.txt
+
+artifacts:
   files:
-    - dummy.txt
-      
-
-
+    - build-output.txt
