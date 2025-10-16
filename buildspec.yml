@@ -32,5 +32,5 @@ phases:
           --parameter-overrides \
               FunctionName=unload-job \
               ScheduleExpression="rate(5 minutes)" \
-
               LambdaRoleArn="arn:aws:iam::794038240530:role/lambda-role"
+
