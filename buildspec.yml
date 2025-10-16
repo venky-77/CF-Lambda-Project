@@ -26,10 +26,11 @@ phases:
     commands:
       - echo "Deploying CloudFormation stack..."
       - aws cloudformation deploy \
-          --template-file template.yaml \
+          --template-file template.yml \
           --stack-name lambda-unload-job-stack \
           --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM \
           --parameter-overrides \
               FunctionName=unload-job \
               ScheduleExpression="rate(5 minutes)" \
+
               LambdaRoleArn="arn:aws:iam::794038240530:role/lambda-role"
