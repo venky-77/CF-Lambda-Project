@@ -3,13 +3,12 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      python: 3.9
-
+      python: 3.x
+    commands:
+      - pip install awscli --upgrade
   build:
     commands:
-      - aws cloudformation deploy --template-file template.yml --stack-name Lambda-unload-job-stack
-      - echo "Build completed successfully" > build-output.txt
-
-artifacts:
-  files:
-    - build-output.txt
+      - echo "Deploying CloudFormation stack"
+      - aws cloudformation deploy \
+          --template-file template.yaml \
+          --stack-name MyLambdaSchedulerStack
