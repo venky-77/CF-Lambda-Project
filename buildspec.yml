@@ -24,8 +24,13 @@ phases:
       python: 3.9
   build:
     commands:
-      - echo "Deploying CloudFormation stack..."
+      - echo "Validating CloudFormation template..."
+      - aws cloudformation validate-template \
+          --template-body file://template.yml
+
+      - echo "Deploying Lambda unload job stack..."
       - aws cloudformation deploy \
           --template-file template.yml \
-          --stack-name lambda-unload-job-stack
+          --stack-name lambda-unload-job-stack \
+          --region us-east-1
 
