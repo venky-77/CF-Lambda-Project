@@ -27,17 +27,17 @@ Resources:
               print("Lambda triggered by EventBridge Scheduler Group")
               return
 
-  MySchedulerGroup:
-    Type: AWS::Scheduler::ScheduleGroup
-    Properties:
-      Name: MySchedulerGroup
-      Tags:
-        - Key: Project
-          Value: EventAutomation
-        - Key: Owner
-          Value: CloudTeam
-        - Key: Environment
-          Value: Production
+  # MySchedulerGroup:
+  #   Type: AWS::Scheduler::ScheduleGroup
+  #   Properties:
+  #     Name: MySchedulerGroup
+  #     Tags:
+  #       - Key: Project
+  #         Value: EventAutomation
+  #       - Key: Owner
+  #         Value: CloudTeam
+  #       - Key: Environment
+  #         Value: Production
 
   EventBridgeSchedulerRule:
     Type: AWS::Scheduler::Schedule
@@ -47,7 +47,7 @@ Resources:
       FlexibleTimeWindow:
         Mode: "OFF"
       State: ENABLED  
-      GroupName: !Ref MySchedulerGroup
+      GroupName: default
       Target:
         Arn: !GetAtt MyLambdaFunction.Arn
         RoleArn: !Ref ExistingSchedulerExecutionRoleArn
@@ -58,9 +58,9 @@ Outputs:
     Description: Name of the Lambda function
     Value: !Ref MyLambdaFunction
 
-  SchedulerGroupName:
-    Description: Name of the EventBridge Scheduler group
-    Value: !Ref MySchedulerGroup
+  # SchedulerGroupName:
+  #   Description: Name of the EventBridge Scheduler group
+  #   Value: !Ref MySchedulerGroup
 
   SchedulerRuleName:
     Description: Name of the EventBridge Scheduler rule
@@ -72,4 +72,5 @@ Outputs:
 
   SchedulerExecutionRoleArn:
     Description: Passed-in ARN of the Scheduler execution role
+
     Value: !Ref ExistingSchedulerExecutionRoleArn
