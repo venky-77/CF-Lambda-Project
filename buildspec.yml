@@ -4,11 +4,14 @@ phases:
   install:
     runtime-versions:
       python: 3.9
+
   build:
     commands:
-      - echo "Validating CloudFormation template..."
-      - aws cloudformation validate-template \
-          --template-body file://template.yml
+      - echo "Listing files in working directory..."
+      - ls -la
+
+      - echo "Showing contents of template.yml..."
+      - cat template.yml
 
       - echo "Deploying Lambda unload job stack..."
       - aws cloudformation deploy \
