@@ -7,14 +7,7 @@ phases:
 
   build:
     commands:
-      - echo "Listing files in working directory..."
-      - ls -la
-
-      - echo "Showing contents of template.yml..."
-      - cat template.yml
-
-      - echo "Deploying Lambda unload job stack..."
-      - aws cloudformation deploy \
-          --stack-name lambda-unload-job-stack \
-          --template-file template.yml \
-          --region us-east-1
+       aws cloudformation deploy \
+         --template-body file://template.yml \
+         --stack-name lambda-unload-job-stack \
+         --region us-east-1
