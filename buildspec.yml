@@ -8,4 +8,9 @@ phases:
   build:
     commands:
       - aws cloudformation deploy --stack-name Lambda-unload-job-stack --template-file template.yml --region us-east-1
+artificats:
+  files:
+    - dummy.txt
+      
+
 
