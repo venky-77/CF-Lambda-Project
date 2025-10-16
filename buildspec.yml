@@ -15,6 +15,6 @@ phases:
 
       - echo "Deploying Lambda unload job stack..."
       - aws cloudformation deploy \
-          --template-file template.yml \
           --stack-name lambda-unload-job-stack \
+          --template-file template.yml \
           --region us-east-1
