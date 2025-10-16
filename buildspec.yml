@@ -1,21 +1,3 @@
-# version: 0.2
-
-# phases:
-#   install:
-#     runtime-versions:
-#       python: 3.9
-#   build:
-#     commands:
-#       - echo "Starting CloudFormation deployment..."
-#       - aws cloudformation deploy \
-#           --capabilities CAPABILITY_AUTO_EXPAND \
-#           --no-execute-changeset \
-#           --no-fail-on-empty-changeset \
-#           --region us-gov-east-1 \
-#           --role-arn arn:aws-us-east:iam::12356789:role/stormline-cloudformation-deployer \
-#           --stack-name stormline-lambda-poc-cft \
-#           --template-file template.yml
-
 version: 0.2
 
 phases:
@@ -33,4 +15,3 @@ phases:
           --template-file template.yml \
           --stack-name lambda-unload-job-stack \
           --region us-east-1
-
