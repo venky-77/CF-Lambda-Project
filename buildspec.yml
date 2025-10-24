@@ -1,12 +1,25 @@
+# version: 0.2
+
+# phases:
+#   install:
+#     runtime-versions:
+#       python: 3.9
+#     commands:
+#       - pip install awscli --upgrade
+#   build:
+#     commands:
+#       - echo "Deploying CloudFormation stack"
+#       - aws cloudformation deploy --template-file template.yml --stack-name MyLambdaSchedulerStack
+
 version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      python: 3.9
     commands:
-      - pip install awscli --upgrade
+      - echo Installing dependencies...
   build:
     commands:
-      - echo "Deploying CloudFormation stack"
-      - aws cloudformation deploy --template-file template.yml --stack-name MyLambdaSchedulerStack
+      - echo Starting build...
+      - aws cloudformation deploy --template-file template.yaml --stack-name MyStack --capabilities CAPABILITY_NAMED_IAM
+
+
