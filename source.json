@@ -1,0 +1,8 @@
+{
+  "type": "GITHUB",
+  "location": "https://github.com/venky-77/CF-Lambda-Project",
+  "auth": {
+    "type": "OAUTH",
+    "resource": "arn:aws:codestar-connections:us-east-1:794038240530:connection/dec72e48-ac24-4b53-ab28-45e80d08e3c6"
+  }
+}
