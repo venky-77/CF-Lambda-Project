@@ -72,7 +72,7 @@ Outputs:
 
   SchedulerExecutionRoleArn:
     Description: Passed-in ARN of the Scheduler execution role
-
     Value: !Ref ExistingSchedulerExecutionRoleArn
+
 
 
