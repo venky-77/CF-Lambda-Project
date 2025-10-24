@@ -11,15 +11,28 @@
 #       - echo "Deploying CloudFormation stack"
 #       - aws cloudformation deploy --template-file template.yml --stack-name MyLambdaSchedulerStack
 
+# version: 0.2
+
+# phases:
+#   install:
+#     commands:
+#       - echo Installing dependencies...
+#   build:
+#     commands:
+#       - echo Starting build...
+#       - aws cloudformation deploy --template-file template.yaml --stack-name MyStack --capabilities CAPABILITY_NAMED_IAM
+
 version: 0.2
 
 phases:
   install:
     commands:
-      - echo Installing dependencies...
+      - echo "Installing AWS CLI..."
+      - pip install --upgrade awscli
   build:
     commands:
-      - echo Starting build...
-      - aws cloudformation deploy --template-file template.yaml --stack-name MyStack --capabilities CAPABILITY_NAMED_IAM
-
-
+      - echo "Deploying CloudFormation stack..."
+      - aws cloudformation deploy \
+          --template-file template.yml \
+          --stack-name MyLambdaScheduleStack \
+          --capabilities CAPABILITY_NAMED_IAM
