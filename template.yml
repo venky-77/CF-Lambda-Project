@@ -110,5 +110,61 @@ Outputs:
 #         - Arn: !GetAtt UnloadLambdaFunction.Arn
 #           Id: LambdaTarget
 
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Lambda triggered by EventBridge schedule
+
+Resources:
+  MyLambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+  MyLambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: MyScheduledLambda
+      Handler: index.lambda_handler
+      Role: !GetAtt MyLambdaExecutionRole.Arn
+      Runtime: python3.9
+      Timeout: 60
+      Code:
+        ZipFile: |
+          import json
+          import datetime
+          def lambda_handler(event, context):
+              print("Lambda triggered at:", datetime.datetime.utcnow())
+              return {"statusCode": 200, "body": "Triggered successfully"}
+
+  MyEventBridgeRule:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: LambdaScheduleRule
+      ScheduleExpression: rate(5 minutes)
+      State: ENABLED
+      Targets:
+        - Arn: !GetAtt MyLambdaFunction.Arn
+          Id: LambdaTarget
+
+  PermissionForEventsToInvokeLambda:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref MyLambdaFunction
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt MyEventBridgeRule.Arn
+
+Outputs:
+  LambdaFunctionName:
+    Description: Lambda function name
+    Value: !Ref MyLambdaFunction
+
 
 
